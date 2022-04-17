@@ -1,0 +1,8 @@
+{
+    "zabbix": {
+        "url": "http://zabbix.company.com/zabbiz/api_jsonrpc.php",
+        "user": "Admin",
+        "password": "Password"
+    },
+    "updateInterval": "0 * * * * *"
+}
