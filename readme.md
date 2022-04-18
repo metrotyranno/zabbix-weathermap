@@ -20,7 +20,14 @@ A program that creates a weathermap to be used as a background in zabbix maps.
 
 ## Installation ##
 
-TODO
+```bash
+git clone https://github.com/metrotyranno/zabbix-weathermap.git
+cd zabbix-weathermap
+npm install
+pm2 start . --name zabbix-weathermap
+```
+
+The map configuration files are automatically created on a first run.
 
 ## Configuration ##
 ### Main Configuration ###
@@ -42,8 +49,8 @@ This configuration is fairly straight forward. Keep in mind that the protocol sh
 ```json
 {
     "name": "MAP NAME",
-    "enabled": true,
-    "colorMap": [ // The color map is used to convert the link utilization % to a color to draw with.
+    "enabled": false,       //Set to true to draw / update the background image with a weathermap
+    "colorMap": [           // The color map is used to convert the link utilization % to a color to draw with.
         {
             "start": 0,
             "end": 0,
