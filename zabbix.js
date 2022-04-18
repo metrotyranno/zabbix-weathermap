@@ -50,6 +50,16 @@ const getMaps = async () => {
     return response.data.result;
 }
 
+const createImage = async (name, image) => {
+    const response = await request('image.create', {
+        "name": name,
+        "imagetype": "2",
+        "image": image
+    });
+    console.log
+    return response.data.result;
+}
+
 const updateImage = async (id, image) => {
     const response = await request('image.update', {
         "imageid": id,
@@ -78,11 +88,21 @@ const getItem = async (host, key) => {
     return response.data.result[0] ? response.data.result[0].lastvalue : 0;
 }
 
+const setMapBackground = async (id, imageid) => {
+    const response = await request('map.update', {
+        "sysmapid": id,
+        "backgroundid": imageid
+    });
+    return response.data;
+}
+
 // Export methods
 export {
     login,
     getMaps,
+    createImage,
     updateImage,
     getImage,
-    getItem
+    getItem,
+    setMapBackground
 }

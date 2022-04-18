@@ -13,6 +13,7 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
 const tick = async () => {
     console.log(`Starting a run...`)
+
     //Login to zabbix
     await zabbix.login();
 
@@ -198,13 +199,21 @@ const tick = async () => {
             }
 
             //Write canvas to disk
-            fs.writeFileSync(`./maps/${map.name}.png`, canvas.toBuffer('image/png'));
+            // fs.writeFileSync(`./maps/${map.name}.png`, canvas.toBuffer('image/png'));
 
             //Get map base64 image without header
             const base64 = canvas.toDataURL('image/png').replace(/^data:image\/png;base64,/, '');
 
-            //Upload image to zabbix
-            await zabbix.updateImage(map.backgroundid, base64);
+            //If background image is already set
+            if (map.backgroundid) {
+                //Upload image to zabbix
+                await zabbix.updateImage(map.backgroundid, base64);
+            } else {
+                const image = await zabbix.createImage(map.name + " " + new Date().toLocaleString(), base64);
+
+                //Update zabbix map to use new background
+                await zabbix.setMapBackground(map.sysmapid, config.backgroundImage);
+            }
         }
     }
     console.log(`Run finished`)
