@@ -27,8 +27,6 @@ npm install
 pm2 start . --name zabbix-weathermap
 ```
 
-The map configuration files are automatically created on a first run.
-
 ## Configuration ##
 ### Main Configuration ###
 **config.json**
@@ -45,6 +43,8 @@ The map configuration files are automatically created on a first run.
 This configuration is fairly straight forward. Keep in mind that the protocol should be correct. If you use HTTPS, the API url should be HTTPS too.
 
 ### Map Configuration ###
+The map configuration file is automatically generated on every run. It is created in a disabled state.
+
 **mapname.json**
 ```json
 {
